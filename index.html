@@ -129,20 +129,24 @@
         document.dispatchEvent(new KeyboardEvent(type, { key: key, bubbles: true }));
     }
 
-    // Add Event Listeners for Touch Buttons
-    document.querySelectorAll('.btn').forEach(button => {
-        let key = button.getAttribute('data-key');
+document.querySelectorAll('.btn').forEach(button => {
+    let key = button.getAttribute('data-key');
 
-        button.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            simulateKeyEvent(key, "keydown");
-        });
-
-        button.addEventListener('touchend', (e) => {
-            e.preventDefault();
-            simulateKeyEvent(key, "keyup");
-        });
+    button.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        simulateKeyEvent(key, "keydown");
     });
+
+    button.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        simulateKeyEvent(key, "keyup");
+    });
+});
+
+function simulateKeyEvent(key, type) {
+    document.dispatchEvent(new KeyboardEvent(type, { key: key, code: key, bubbles: true }));
+}
+
 </script>
 
 </body>
